@@ -59,6 +59,10 @@ class Ant(Automaton):
     def __init__(self, x, y, color=colors.RED, blocksize=grid.BLOCKSIZE):
         super(Ant, self).__init__(x, y, color, graphics.ant, blocksize)
 
+    def draw(self, screen):
+        pygame.draw.rect(screen, colors.BLACK, self.rect)
+        super(Ant, self).draw(screen)
+
 
 class Track(Automaton):
 
