@@ -35,10 +35,8 @@ class AntSimulation(object):
         self.screen = pygame.display.set_mode(self.screen_size)
         self.clock = pygame.time.Clock()
         for _ in range(self.n_ants):
-            x = self.width // 2
-            y = self.heigth // 2
             color = random.choice(colors.VISIBLES)
-            self.ants.append(Ant(x, y, color))
+            self.ants.append(Ant(0, 0, color))
 
     @property
     def screen_size(self):
@@ -53,8 +51,8 @@ class AntSimulation(object):
     def random_move(self, entity):
         x, y = random.choice(list(motion.DIRECTIONS.values()))
 
-        if all((0 < entity.x + x < self.width,
-                0 < entity.y + y < self.heigth)):
+        if all((0 <= entity.x + x < self.width,
+                0 <= entity.y + y < self.heigth)):
             entity.move(x, y)
         else:
             self.random_move(entity)
