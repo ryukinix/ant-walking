@@ -9,7 +9,8 @@
 from abc import ABCMeta, abstractproperty, abstractmethod
 
 
-class Entity(metaclass=ABCMeta):
+class Entity(object):
+    __metaclass__ = ABCMeta
 
     def __init__(self, x, y, color, graphics, blocksize=8):
         self.x = x

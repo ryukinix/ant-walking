@@ -57,13 +57,13 @@ class Automaton(Entity):
 class Ant(Automaton):
 
     def __init__(self, x, y, color=colors.RED, blocksize=grid.BLOCKSIZE):
-        super().__init__(x, y, color, graphics.ant, blocksize)
+        super(Ant, self).__init__(x, y, color, graphics.ant, blocksize)
 
 
 class Track(Automaton):
 
     def __init__(self, x, y, color=colors.BLUE, blocksize=grid.BLOCKSIZE):
-        super().__init__(x, y, color, graphics.track, blocksize)
+        super(Track, self).__init__(x, y, color, graphics.track, blocksize)
         self.count = 1
 
     def __repr__(self):
@@ -74,7 +74,7 @@ class Track(Automaton):
         return cls(ant.x, ant.y, ant.color, ant.blocksize)
 
     def collide(self, entity):
-        collided = super().collide(entity)
+        collided = super(Track, self).collide(entity)
         if collided:
             self.mutate_color(entity.color)
             self.count += 1
