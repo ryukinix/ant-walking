@@ -15,4 +15,3 @@ DIRECTIONS = {
     "RIGHT": (grid.BLOCKSIZE, 0),
     "DOWN": (0, grid.BLOCKSIZE)
 }
-
