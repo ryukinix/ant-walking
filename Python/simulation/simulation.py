@@ -6,13 +6,14 @@
 #
 #
 
-from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
+from pygame.locals import K_ESCAPE, KEYDOWN, QUIT, K_SPACE
 from automaton import Ant, Track
 import motion
 import pygame
 import random
 import colors
 import grid
+import time
 
 FPS = 30
 
@@ -43,19 +44,21 @@ class AntSimulation(object):
         return self.width, self.heigth
 
     def event_handler(self, event):
-        if event.type == KEYDOWN and event.key == K_ESCAPE:
+        if event.type == QUIT:
             self.running = False
-        elif event.type == QUIT:
-            self.running = False
+        elif event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
+                self.running = False
+            elif event.key == K_SPACE:
+                time.sleep(1)
 
     def random_move(self, entity):
         x, y = random.choice(list(motion.DIRECTIONS.values()))
 
-        if all((0 <= entity.x + x < self.width,
-                0 <= entity.y + y < self.heigth)):
-            entity.move(x, y)
-        else:
-            self.random_move(entity)
+        moveble = all((0 <= entity.x + x < self.width,
+                       0 <= entity.y + y < self.heigth))
+
+        entity.move(x, y) if moveble else self.random_move(entity)
 
     def draw_ants(self):
         for ant in self.ants:
@@ -65,6 +68,9 @@ class AntSimulation(object):
                 self.tracks.append(track)
             self.random_move(ant)
             ant.draw(self.screen)
+
+    def update(self):
+        pygame.display.flip()
 
     def draw_tracks(self):
         for track in self.tracks:
@@ -78,7 +84,7 @@ class AntSimulation(object):
             self.screen.fill(colors.BLACK)
             self.draw_tracks()
             self.draw_ants()
-            pygame.display.flip()
+            self.update()
             self.clock.tick(self.fps)
 
     @classmethod
@@ -93,4 +99,4 @@ class AntSimulation(object):
 
 if __name__ == '__main__':
     from pprint import pprint
-    pprint(sorted(AntSimulation.run(), key=lambda self: (self.x, self.y)))
+    pprint(sorted(AntSimulation.run(), key=lambda self: self.position))
