@@ -36,6 +36,6 @@ Beyond that you need too the Pygame library. If you are using Ubuntu, you can ty
 
 If pip was not installed try: `sudo apt-get install python-pip`.
 
-If you are using Windows, you need eternal suffering. Ow, I'm kidding. You can try installing using the pre-compiled lib binaries [`here`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame) keeping attention with your [python](www.python.org) version.
+If you are using Windows, you need eternal suffering. Ow, I'm kidding. You can try installing using the pre-compiled lib binaries [`here`](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame) keeping attention with your [python](https://www.python.org) version.
 
 After that, only execute at terminal in proper directory: `python simulation.py`
